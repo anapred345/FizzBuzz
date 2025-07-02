@@ -27,25 +27,25 @@ function reverse(message: string):string{
 }
 
 
-function fizzbuzz(nr: number, rule: string): void {
+function fizzbuzz(nr: number, rule: string[]): void {
     let message: string;
     for(let i = 1; i <= nr; i++ ){
         message = i.toString();
-        if(i % 11 === 0){
+        if(i % 11 === 0 && rule[3] == 'yes'){
             message = "Bong";
         }
         else{
-            if(i % 3 === 0 && rule == 'yes'){
+            if(i % 3 === 0 && rule[0] == 'yes'){
                 message = "Fizz";
             }
-            if(i % 5 === 0){
+            if(i % 5 === 0 && rule[1] == 'yes'){
                 if(message === i.toString()){
                     message = "Buzz";
                 }
                 else
                     message = message.concat("Buzz");
             }
-            if(i % 7 === 0){
+            if(i % 7 === 0 && rule[2] == 'yes'){
                 if(message === i.toString()){
                     message = "Bang";
                 }
@@ -53,14 +53,14 @@ function fizzbuzz(nr: number, rule: string): void {
                     message = message.concat("Bang");
             }
         }
-        if(i % 13 === 0){
+        if(i % 13 === 0 && rule[4] == 'yes'){
             if(message === i.toString()){
                 message = "Fezz";
             }
             else
                 message = fezz(message);
         }
-        if(i % 17 === 0){
+        if(i % 17 === 0 && rule[5] == 'yes'){
             if(message.length > 4){
                 message = reverse(message);
             }
@@ -75,12 +75,30 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
+let rule:string[] = [];
+
 async function rules(){
     rl.question("Write a number: ", (userInput: string) => {
         const maxNr = Number(userInput);
-        rl.question("Write a rule: ", (ruleUserInput: string) => {
-            fizzbuzz(maxNr,ruleUserInput);
-            rl.close();
+        rl.question("Fizz rule (yes/ no): ", (ruleUserInput: string) => {
+            rule[0] = ruleUserInput;
+            rl.question("Buzz rule (yes/ no): ", (ruleUserInput: string) => {
+                rule[1] = ruleUserInput;
+                rl.question("Bang rule (yes/ no): ", (ruleUserInput: string) => {
+                    rule[2] = ruleUserInput;
+                    rl.question("Bong rule (yes/ no): ", (ruleUserInput: string) => {
+                        rule[3] = ruleUserInput;
+                        rl.question("Fezz rule (yes/ no): ", (ruleUserInput: string) => {
+                            rule[4] = ruleUserInput;
+                            rl.question("Reverse rule (yes/ no): ", (ruleUserInput: string) => {
+                                rule[5] = ruleUserInput;
+                                fizzbuzz(maxNr,rule);
+                                rl.close();
+                            });
+                        });
+                    });
+                });
+            });
         });
     });
 }
