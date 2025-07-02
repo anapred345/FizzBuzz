@@ -14,9 +14,22 @@ function fezz(message: string):string{
     return message;
 }
 
+function reverse(message: string):string{
+    let nr_cuv:number = message.length / 4;
+    let cuv: string[] = [];
+    for(let i = 1 ; i <= nr_cuv; i++){
+        cuv[i] = message.slice((i-1)*4, i*4);
+    }
+    message = cuv[nr_cuv];
+    for(let i = nr_cuv - 1; i > 0; i--){
+        message = message.concat(cuv[i]);
+    }
+    return message;
+}
+
 function fizzbuzz(): void {
     let message: string;
-    for(let i = 1; i <= 143; i++ ){
+    for(let i = 1; i <= 1785; i++ ){
         message = i.toString();
          if(i % 11 === 0){
              message = "Bong";
@@ -45,7 +58,12 @@ function fizzbuzz(): void {
             }
             else
                 message = fezz(message);
-         }
+        }
+        if(i % 17 === 0){
+            if(message.length > 4){
+                message = reverse(message);
+            }
+        }
         console.log(message);
     }
 }
