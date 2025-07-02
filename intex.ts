@@ -16,13 +16,10 @@ function fezz(message: string):string{
 
 function fizzbuzz(): void {
     let message: string;
-    for(let i = 1; i <= 455; i++ ){
+    for(let i = 1; i <= 143; i++ ){
         message = i.toString();
          if(i % 11 === 0){
              message = "Bong";
-             if(i % 13 === 0){
-                 message = fezz(message);
-             }
          }
          else if(i % 3 === 0){
              message = "Fizz";
@@ -32,25 +29,22 @@ function fizzbuzz(): void {
              if(i % 7 === 0){
                  message = message.concat("Bang");
              }
-             if(i % 13 === 0){
-                 message = fezz(message);
-             }
         }
         else if(i % 5 === 0){
              message = "Buzz"
              if(i % 7 === 0){
                  message = message.concat("Bang");
-                 if(i % 13 === 0)
-                     message = fezz(message);
              }
         }
         else if(i % 7 === 0){
             message = "Bang";
-                 if(i % 13 === 0)
-                     message = fezz(message);
         }
-        else if(i % 13 === 0){
-            message = "Fezz";
+        if(i % 13 === 0){
+            if(message === i.toString()){
+                message = "Fezz";
+            }
+            else
+                message = fezz(message);
          }
         console.log(message);
     }
