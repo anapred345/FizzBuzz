@@ -27,9 +27,9 @@ function reverse(message: string):string{
     return message;
 }
 
-function fizzbuzz(): void {
+function fizzbuzz(nr: number): void {
     let message: string;
-    for(let i = 1; i <= 1785; i++ ){
+    for(let i = 1; i <= nr; i++ ){
         message = i.toString();
          if(i % 11 === 0){
              message = "Bong";
@@ -69,4 +69,14 @@ function fizzbuzz(): void {
 }
 
 // Now, we run the main function:
-fizzbuzz();
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+rl.question("Write a maximum number: ", number =>{
+    fizzbuzz(number);
+    rl.close();
+});
